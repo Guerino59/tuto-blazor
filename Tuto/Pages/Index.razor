@@ -1,0 +1,20 @@
+﻿@page "/"
+@using Tuto.Pages.ContactComponent
+
+<h1>Index Page</h1>
+<br />
+<ContactList Contacts="contacts">
+    <NullContacts>
+        <br />
+        <span>Contacts are loading</span>
+        <br />
+    </NullContacts>
+    <EmptyContacts>
+        <br />
+        <span>No Contacts Founded</span>
+        <br />
+    </EmptyContacts>
+</ContactList>
+
+<MyTextBox @attributes="MyTextBoxAttributes"></MyTextBox>
+

@@ -1,0 +1,11 @@
+﻿@page "/authors/authorDetail/{authorId:int}"
+@page "/authors/authorDetail/"
+@page "/author"
+
+<h3>AuthorDetail</h3>
+<hr>
+<p>@AuthorId / loremeflekfefkekfepkfekpfek</p>
+@code {
+    [Parameter]
+    public int AuthorId { get; set; }
+}
