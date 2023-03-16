@@ -1,26 +1,32 @@
-﻿<input type="checkbox" @bind="DisplayEmail" /><label>Display Email</label>
+﻿@inject IJSRuntime js
 
-@if(Contacts is null)
+<input type="checkbox" @bind="DisplayEmail" /><label>Display Email</label>
+@if(displayContacts)
 {
-    @NullContacts
-}
-else if(Contacts.Count == 0)
-{
-    @EmptyContacts
-}
-else
-{
-    @foreach (var contact in Contacts)
+      @if(Contacts is null)
     {
-        <ContactComponent01 CurrentContact="contact" DisplayEmail="@DisplayEmail" DeleteCurrentContact="DeleteContact"></ContactComponent01>
+        @NullContacts
     }
+    else if(Contacts.Count == 0)
+    {
+        @EmptyContacts
+    }
+    else
+    {
+        @foreach (var contact in Contacts)
+        {
+            <ContactComponent01 CurrentContact="contact" DisplayEmail="@DisplayEmail" DeleteCurrentContact="RequestPermission"></ContactComponent01>
+        }
+    }  
 }
 
+<DeleteConfirmation @ref="deleteConfirmation" OnConfirmed="OnDeleteConfirmed"></DeleteConfirmation>
 
 
 <br />
 
 @code{
+    private DeleteConfirmation deleteConfirmation;
     [Parameter]
     public RenderFragment NullContacts{ get; set; }
     [Parameter]
@@ -28,8 +34,26 @@ else
     [Parameter]
     public List<Contact> Contacts { get; set; }
     private bool DisplayEmail = false;
-    private void DeleteContact(Contact contact)
+    private bool displayContacts = true;
+    private async Task RequestPermission(Contact contact)
+    {
+        //var confirm = await js.InvokeAsync<bool>("confirm", $"Do you really want to delete {contact.FirstName} {contact.LastName} from contacts list");
+        //if(confirm)
+        //{
+        //    Contacts.Remove(contact);   
+        //}
+
+        deleteConfirmation.BodyContent = $"Do you need to delete {contact.FirstName} {contact.LastName}";
+        deleteConfirmation.ContactToDelete = contact;
+        deleteConfirmation.Show();
+    }
+
+    private async Task OnDeleteConfirmed(Contact contact)
     {
         Contacts.Remove(contact);
+        deleteConfirmation.Hide();
     }
+
+    public void ShowContact() => displayContacts = true;
+    public void HideContact() => displayContacts = false;
 }

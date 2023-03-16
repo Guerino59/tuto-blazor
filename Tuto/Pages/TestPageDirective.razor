@@ -1,0 +1,16 @@
+﻿@inject NavigationManager navManager
+@page "/testpage"
+@page "/testpage2"
+@page "/testpage/demo"
+
+<h3>TestPageDirective</h3>
+ 
+<a href="./">Index</a>
+
+<button @onclick="NavigateToIndex">Navigate to Index</button>
+@code {
+    private void NavigateToIndex()
+    {
+        navManager.NavigateTo("./");
+    }
+}

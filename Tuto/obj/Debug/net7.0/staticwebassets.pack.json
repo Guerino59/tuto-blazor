@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Tuto.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\USER\\source\\repos\\Tuto\\Tuto\\wwwroot\\JS\\sample.js",
+      "PackagePath": "staticwebassets\\JS\\sample.js"
+    },
+    {
       "Id": "C:\\Users\\USER\\source\\repos\\Tuto\\Tuto\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

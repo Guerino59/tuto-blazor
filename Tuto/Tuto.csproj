@@ -10,4 +10,8 @@
     <Compile Remove="Pages\Inde.razor.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
 </Project>

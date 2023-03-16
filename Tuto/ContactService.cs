@@ -2,12 +2,17 @@
 
 namespace Tuto
 {
-    public class ContactService
+    public class ContactService : IContactService
     {
-        public List<Contact> ContactList = new List<Contact>();
+        private List<Contact> contactList = new List<Contact>();
+
+        public List<Contact> GetContacts()
+        {
+            return contactList;
+        }
         public void AddContact(Contact contact)
         {
-            ContactList.Add(contact);
+            contactList.Add(contact);
         }
     }
 }

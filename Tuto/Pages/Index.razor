@@ -3,7 +3,7 @@
 
 <h1>Index Page</h1>
 <br />
-<ContactList Contacts="contacts">
+<ContactList @ref="contactList" Contacts="contacts">
     <NullContacts>
         <br />
         <span>Contacts are loading</span>
@@ -18,3 +18,9 @@
 
 <MyTextBox @attributes="MyTextBoxAttributes"></MyTextBox>
 
+<button @onclick="HideContacts">Show / Hide CONTACTS</button>
+
+<a href="./testpage">Test page directive</a>
+<br />
+<br />
+<button @onclick="NavigateToTest">Navigate to testpage</button>
