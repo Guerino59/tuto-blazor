@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Diagnostics.Metrics;
 using Tuto;
 using Tuto.Data;
+using Tuto.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 

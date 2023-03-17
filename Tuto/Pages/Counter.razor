@@ -1,18 +1,71 @@
 ﻿@page "/counter"
+@using System.Timers
+@implements IDisposable
 
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
+<h1 style="color:@AppTheme.PrimaryColor">Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
+<p style="color:@AppTheme.SecondaryColor" role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 <br />
 <input @bind="currentCount"/>
-@code {
-    private int currentCount = 0;
+<br />
+<br />
+<span>Primary Color: </span>
+<select @bind="AppTheme.PrimaryColor">
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+</select>
+<br />
+<br />
+<span>Secondary Color: </span>
+<select @bind="AppTheme.SecondaryColor">
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+</select>
+<br />
+<br />
+<span style="color:red; font-weight:700">@dateTimeValue</span>
 
+
+@code {
+
+    [CascadingParameter]
+    public Theme AppTheme { get; set; }
+    private int currentCount = 0;
+    private Timer timer;
+    private string dateTimeValue;
+
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        dateTimeValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+        timer = new Timer();
+        timer.Interval = 1000;
+        timer.Elapsed += OnTimerElapsed;
+        timer.Enabled = true;
+    }
+    public void Dispose()
+    {
+        timer.Dispose();
+    }
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        dateTimeValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+        Console.WriteLine(dateTimeValue);
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
     private void IncrementCount()
     {
         currentCount++;

@@ -1,5 +1,5 @@
 ﻿<p>
-    <b>Name: </b><span>@CurrentContact.FirstName @CurrentContact.LastName</span>
+    <b>Name: </b><span style="color: @AppTheme.SecondaryColor">@CurrentContact.FirstName @CurrentContact.LastName</span>
     @if(DisplayEmail)
     {
         <br>
@@ -12,13 +12,17 @@
         <br>
         <span>The Email Address of @CurrentContact.FirstName @CurrentContact.LastName is @CurrentContact.Email</span>
     }
+    
     <br />
+    
     <button @onclick="(() => { displayInfo = !displayInfo;})">Show Info</button>
     <button @onclick="(() => DeleteCurrentContact.InvokeAsync(CurrentContact))">Delete</button>
 
 </p>
 
 @code{
+    [CascadingParameter]
+    public Theme AppTheme { get; set; }
     [Parameter]
     public Contact CurrentContact { get; set; }
 

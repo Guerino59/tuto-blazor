@@ -6,6 +6,8 @@ namespace Tuto.Pages
 {
     public partial class Index
     {
+        [CascadingParameter]
+        public Theme AppTheme { get; set; }
         [Inject]
         IContactService contactService { get; set; }
 
